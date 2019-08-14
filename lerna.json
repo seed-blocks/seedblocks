@@ -1,0 +1,20 @@
+{
+	"lerna": "3.4.3",
+	"packages": [
+		"packages/*",
+		"apps/*"
+	],
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://github.com/seed-blocks/seedblocks"
+	},
+	"version": "independent",
+	"npmClient": "yarn",
+	"useWorkspaces": true,
+	"command": {
+		"version": {
+			"allowBranch": ["develop", "release/*"],
+			"message": "chore(release): release"
+		}
+	}
+}
