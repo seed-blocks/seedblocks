@@ -89,3 +89,8 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Intelij
+.idea
+
+# VS Code
+.vscode
