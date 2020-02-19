@@ -15,10 +15,9 @@
 		"**/*.md"
 	],
 	"command": {
-		"publish": {
-			"conventionalCommits": true,
+		"version": {
 			"allowBranch": ["master", "next"],
-			"message": "chore(release): Publish"
+			"message": "chore(release): release"
 		}
 	}
 }
