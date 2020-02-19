@@ -1,8 +1,7 @@
 {
 	"lerna": "3.19.0",
 	"packages": [
-		"packages/*",
-		"apps/*"
+		"packages/*"
 	],
 	"publishConfig": {
 		"access": "public",
@@ -11,10 +10,15 @@
 	"version": "independent",
 	"npmClient": "yarn",
 	"useWorkspaces": true,
+	"ignoreChanges": [
+		"**/__tests__/**",
+		"**/*.md"
+	],
 	"command": {
-		"version": {
-			"allowBranch": ["develop", "release/*"],
-			"message": "chore(release): release"
+		"publish": {
+			"conventionalCommits": true,
+			"allowBranch": ["master", "next"],
+			"message": "chore(release): Publish"
 		}
 	}
 }
