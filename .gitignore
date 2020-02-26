@@ -94,3 +94,6 @@ typings/
 
 # VS Code
 .vscode
+
+.DS_Store
+report.*.json
