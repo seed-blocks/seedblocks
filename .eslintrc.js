@@ -1,6 +1,6 @@
 module.exports = {
   parser: "babel-eslint",
-  extends: ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  extends: ["airbnb", "plugin:prettier/recommended"],
   env: {
     jest: true,
     browser: true
@@ -31,7 +31,6 @@ module.exports = {
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/no-autofocus": "off",
-    "react/jsx-props-no-spreading": "off",
     "import/export": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
