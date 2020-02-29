@@ -2,7 +2,7 @@ module.exports = {
   testEnvironment: "jest-environment-jsdom-fifteen",
   rootDir: __dirname,
   collectCoverageFrom: [
-    "packages/components/src/**/*.{js,ts,tsx}",
+    "packages/seedblocks-components/src/**/*.{js,ts,tsx}",
     "!**/*-test.{js,ts,tsx}"
   ],
   projects: ["<rootDir>/packages/*/jest*config.js"],
