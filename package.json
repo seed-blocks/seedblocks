@@ -1,6 +1,4 @@
 {
-	"name": "seedblocks",
-	"description": "SeedBlocks Design System",
 	"private": true,
 	"author": {
 		"name": "Praney Behl @praneybehl",
@@ -31,6 +29,7 @@
 		"release": "lerna publish",
 		"changelog": "lerna-changelog",
 		"commit": "git-cz",
+		"setup": "lerna bootstrap",
 		"refresh:modules": "rimraf ./**/node_modules && yarn setup"
 	},
 	"husky": {
@@ -70,8 +69,6 @@
 		"@storybook/html": "5.3.13",
 		"@testing-library/dom": "6.12.2",
 		"@testing-library/jest-dom": "5.1.1",
-		"@testing-library/react": "9.4.0",
-		"@testing-library/react-hooks": "3.2.1",
 		"@textlint/markdown-to-ast": "6.1.7",
 		"@types/jest": "25.1.2",
 		"@types/vfile-message": "1.0.1",
@@ -120,7 +117,9 @@
 		"patch-package": "6.2.0",
 		"prettier": "1.19.1",
 		"raf": "3.4.1",
-		"rimraf": "^3.0.0",
+		"react": "16.13.0",
+		"react-dom": "16.13.0",
+		"rimraf": "3.0.2",
 		"rollup": "1.27.8",
 		"rollup-plugin-babel": "4.3.3",
 		"rollup-plugin-commonjs": "10.1.0",
