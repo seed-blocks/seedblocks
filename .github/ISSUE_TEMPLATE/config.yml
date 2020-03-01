@@ -1,0 +1,7 @@
+contact_links:
+  - name: Github
+    url: https://github.com/seed-blocks/seedblocks/issues
+    about: If you have questions, please use our community on Github or StackOverflow.
+  - name: StackOverflow
+    url: https://stackoverflow.com/questions/tagged/seedblocks
+    about: If you have questions, please use our community on Github or StackOverflow.
