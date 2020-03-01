@@ -1,2 +1,2 @@
-import '@testing-library/jest-dom/extend-expect'
-import '@wordpress/jest-console'
+import "@testing-library/jest-dom/extend-expect";
+import "@wordpress/jest-console";
