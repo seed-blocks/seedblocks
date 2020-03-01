@@ -23,11 +23,13 @@ test("handles number values", () => {
 });
 
 test("handles undefined values", () => {
+	// @ts-ignore
 	const a = get({}, undefined);
 	expect(a).toBe(undefined);
 });
 
 test("handles null values", () => {
+	// @ts-ignore
 	const a = get({}, null);
 	expect(a).toBe(undefined);
 });
