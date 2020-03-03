@@ -18,7 +18,7 @@ const parser = system({
 
 test("uses default breakpoints", () => {
 	const styles = parser({
-		theme: theme,
+		theme,
 		fontSize: [1, 2, 3],
 		color: ["primary", null, "secondary"]
 	});
@@ -38,7 +38,7 @@ test("uses default breakpoints", () => {
 // Per default, we expect it to be impossible to override breakpoints
 test("does *not* use dynamically changed breakpoints", () => {
 	const styles = parser({
-		theme: { ...theme, breakpoints: ['500px', '700px', '900px', '1100px'] },
+		theme: { ...theme, breakpoints: ["500px", "700px", "900px", "1100px"] },
 		fontSize: [1, 2, 3],
 		color: ["primary", null, "secondary"]
 	});
@@ -100,7 +100,7 @@ test("uses dynamically changed breakpoints", () => {
 	});
 
 	const thirdStyles = parser({
-		theme: theme,
+		theme,
 		fontSize: [1, 2, 3],
 		color: ["primary", null, "secondary"]
 	});

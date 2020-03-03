@@ -1,11 +1,13 @@
 import assign from "object-assign";
-import { ConfigStyle, ParsePropType, Parse, Scale, styleFn } from "./types";
+import { ConfigStyle, Parse, Scale, styleFn } from "./types";
 import { get } from "./get";
 import { merge } from "./merge";
 import { defaults } from "./constants";
+// TODO: Fix eslint issues
+/* eslint-disable no-continue,guard-for-in,no-shadow, consistent-return */
 
 function getValue(value: any, scale?: Scale): any {
-	if(scale !== undefined) return get(scale, value, value);
+	if (scale !== undefined) return get(scale, value, value);
 	return undefined;
 }
 
@@ -35,8 +37,8 @@ function parseResponsiveObject(
 	raw: any,
 	_props: any
 ) {
-	let styles: { [key: string]: any} = {};
-	for (let key in raw) {
+	const styles: { [key: string]: any } = {};
+	for (const key in raw) {
 		const breakpoint = breakpoints[key];
 		const value = raw[key];
 		const style = sx(value, scale, _props);
@@ -59,7 +61,7 @@ function parseResponsiveStyle(
 	raw: any,
 	_props: any
 ) {
-	let styles: { [key: string]: { [key: string]: any } } = {};
+	const styles: { [key: string]: { [key: string]: any } } = {};
 	raw.slice(0, mediaQueries.length).forEach((value: number, i: number) => {
 		const media = mediaQueries[i];
 		const style = sx(value, scale, _props);
@@ -77,7 +79,7 @@ function parseResponsiveStyle(
 export function createParser(config: ConfigStyle): styleFn {
 	const cache: any = {};
 
-	const parse: Parse  = (props) => {
+	const parse: Parse = props => {
 		let styles = {};
 		let shouldSort = false;
 		const isCacheDisabled =
@@ -127,7 +129,7 @@ export function createParser(config: ConfigStyle): styleFn {
 			styles = sort(styles);
 		}
 		return styles;
-	}
+	};
 
 	parse.config = config;
 	parse.propNames = Object.keys(config);
@@ -144,20 +146,20 @@ export function createParser(config: ConfigStyle): styleFn {
 }
 
 export function createStyleFunction({
-		properties,
-		property,
-		scale,
-		transform = getValue,
-		defaultScale
-	}: ConfigStyle): styleFn {
+	properties,
+	property,
+	scale,
+	transform = getValue,
+	defaultScale
+}: ConfigStyle): any {
 	properties = properties || [property];
 	const sx: styleFn = (value, scale, _props) => {
 		const result: any = {};
 		const n = transform(value, scale, _props);
 		if (n === null) return;
-		if(properties !== undefined) {
+		if (properties !== undefined) {
 			properties.forEach(prop => {
-				if(prop) result[prop] = n;
+				if (prop) result[prop] = n;
 			});
 		}
 		return result;
@@ -174,7 +176,7 @@ export function system(args: any = {}) {
 		if (conf === true) {
 			// shortcut definition
 			config[key] = createStyleFunction({
-			// @ts-ignore
+				// @ts-ignore
 				property: key,
 				scale: key
 			});
@@ -190,7 +192,7 @@ export function system(args: any = {}) {
 }
 
 export function compose(...parsers: styleFn[]): styleFn {
-	let config = {};
+	const config = {};
 	parsers.forEach(parser => {
 		if (!parser || !parser.config) return;
 		assign(config, parser.config);

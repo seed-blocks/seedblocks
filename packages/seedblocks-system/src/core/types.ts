@@ -1,10 +1,20 @@
-import * as CSS from 'csstype';
+import * as CSS from "csstype";
 
 export type NullOrUndefined = null | undefined;
 
-export type ObjectOrArray<T, K extends keyof any = keyof any> = T[] | Record<K, T | Record<K, T> | T[]>;
+export type ObjectOrArray<T, K extends keyof any = keyof any> =
+	| T[]
+	| Record<K, T | Record<K, T> | T[]>;
 
-export type Scale = (string | number)[] | Record<string | number | symbol, string | number | Record<string | number | symbol, string | number> | (string | number)[]>;
+export type Scale =
+	| (string | number)[]
+	| Record<
+			string | number | symbol,
+			| string
+			| number
+			| Record<string | number | symbol, string | number>
+			| (string | number)[]
+	  >;
 
 export type TLengthStyledSystem = string | 0 | number;
 
@@ -33,16 +43,27 @@ export interface Theme<TLength = TLengthStyledSystem> {
 
 export type RequiredTheme = Required<Theme>;
 
-export type ResponsiveValue<T,
+export type ResponsiveValue<T, ThemeType extends Theme = RequiredTheme> =
+	| T
+	| Array<T | null>
+	| { [key in (ThemeValue<"breakpoints", ThemeType> & string) | number]?: T };
+
+export type ThemeValue<
+	K extends keyof ThemeType,
+	ThemeType,
+	TVal = any
+> = ThemeType[K] extends TVal[]
+	? number
+	: ThemeType[K] extends Record<infer E, TVal>
+	? E
+	: ThemeType[K] extends ObjectOrArray<infer F>
+	? F
+	: never;
+
+export interface SpaceProps<
 	ThemeType extends Theme = RequiredTheme,
-	> = T | Array<T | null> | { [key in ThemeValue<'breakpoints', ThemeType> & string | number]?: T };
-
-export type ThemeValue<K extends keyof ThemeType, ThemeType, TVal = any> =
-	ThemeType[K] extends TVal[] ? number :
-		ThemeType[K] extends Record<infer E, TVal> ? E :
-			ThemeType[K] extends ObjectOrArray<infer F> ? F : never;
-
-export interface SpaceProps<ThemeType extends Theme = RequiredTheme, TVal = ThemeValue<'space', ThemeType>> {
+	TVal = ThemeValue<"space", ThemeType>
+> {
 	/** Margin on top, left, bottom and right */
 	m?: ResponsiveValue<TVal, ThemeType>;
 	/** Margin on top, left, bottom and right */
@@ -148,7 +169,7 @@ export interface Config {
 export type ParsePropType = {
 	theme: Theme;
 	[key: string]: any;
-}
+};
 
 export interface Parse {
 	(props: ParsePropType): {};
@@ -158,13 +179,11 @@ export interface Parse {
 	[key: string]: any;
 }
 
-
 export type ParseResponsiveProps = {
-	breakpoints?: (number | string | { [key: string]: string | number })[],
-	mediaQueries?: (string | number)[],
-	sx: styleFn,
-	scale: Scale,
-	raw: any,
-	_props: any
-}
-
+	breakpoints?: (number | string | { [key: string]: string | number })[];
+	mediaQueries?: (string | number)[];
+	sx: styleFn;
+	scale: Scale;
+	raw: any;
+	_props: any;
+};
