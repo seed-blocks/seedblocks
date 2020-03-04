@@ -22,7 +22,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"noEmit": true,
 		"typeRoots": [
 			"./node_modules/@types",
 			"./node_modules/babel-plugin-jsx-dom-expressions",
