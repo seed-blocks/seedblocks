@@ -11,6 +11,7 @@
 		]
 	},
 	"scripts": {
+		"postinstall": "patch-package",
 		"test": "jest",
 		"test:all": "yarn lint && yarn build && yarn type-check && yarn test && yarn website:build && yarn clean && yarn website:serve",
 		"coverage": "yarn test --coverage",
