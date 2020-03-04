@@ -1,5 +1,4 @@
 {
-	"lerna": "3.19.0",
 	"packages": [
 		"packages/*"
 	],
@@ -17,7 +16,10 @@
 	"command": {
 		"publish": {
 			"conventionalCommits": true,
-			"allowBranch": ["master", "next"],
+			"allowBranch": [
+				"master",
+				"next"
+			],
 			"message": "chore(release): Publish"
 		}
 	}

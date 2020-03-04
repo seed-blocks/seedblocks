@@ -1,4 +1,5 @@
 {
+	"name": "seedblocks",
 	"private": true,
 	"author": {
 		"name": "Praney Behl @praneybehl",
@@ -108,7 +109,7 @@
 		"husky": "^3.0.1",
 		"jest": "25.1.0",
 		"jest-environment-jsdom-fifteen": "1.0.2",
-		"lerna": "^3.19.0",
+		"lerna": "^3.20.2",
 		"lint-staged": "10.0.7",
 		"lodash": "4.17.15",
 		"md-node-inject": "1.0.0",
