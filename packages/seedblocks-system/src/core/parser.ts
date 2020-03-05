@@ -1,8 +1,8 @@
 import assign from "object-assign";
+import { defaults } from "../constants";
 import { ConfigStyle, Parse, Scale, styleFn } from "./types";
 import { get } from "./get";
 import { merge } from "./merge";
-import { defaults } from "./constants";
 // TODO: Fix eslint issues
 /* eslint-disable no-continue,guard-for-in,no-shadow, consistent-return */
 
