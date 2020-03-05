@@ -30,13 +30,7 @@ function sort(obj: { [key: string]: { [key: string]: any } }): Object {
 	return next;
 }
 
-function parseResponsiveObject(
-	breakpoints: any,
-	sx: styleFn,
-	scale: Scale,
-	raw: any,
-	_props: any
-) {
+function parseResponsiveObject(breakpoints: any, sx: styleFn, scale: Scale, raw: any, _props: any) {
 	const styles: { [key: string]: any } = {};
 	for (const key in raw) {
 		const breakpoint = breakpoints[key];
@@ -82,8 +76,7 @@ export function createParser(config: ConfigStyle): styleFn {
 	const parse: Parse = props => {
 		let styles = {};
 		let shouldSort = false;
-		const isCacheDisabled =
-			props.theme && props.theme.disableStyledSystemCache;
+		const isCacheDisabled = props.theme && props.theme.disableStyledSystemCache;
 
 		for (const key in props) {
 			if (!config[key]) continue;
@@ -109,13 +102,7 @@ export function createParser(config: ConfigStyle): styleFn {
 				if (raw !== null) {
 					styles = merge(
 						styles,
-						parseResponsiveObject(
-							cache.breakpoints,
-							sx,
-							scale,
-							raw,
-							props
-						)
+						parseResponsiveObject(cache.breakpoints, sx, scale, raw, props)
 					);
 					shouldSort = true;
 				}
