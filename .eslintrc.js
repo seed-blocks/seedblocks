@@ -16,7 +16,8 @@ module.exports = {
 		}
 	},
 	rules: {
-		camelcase: "off",
+		"camelcase": "off",
+		"semi": [1, "always"],
 		"no-use-before-define": "off",
 		"no-restricted-syntax": "off",
 		"no-param-reassign": "off",
