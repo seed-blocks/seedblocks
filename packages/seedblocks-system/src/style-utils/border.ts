@@ -1,7 +1,7 @@
 import { system } from "../core/parser";
 import { Config } from "../core/types";
 
-const config = {
+const config: Config = {
 	border: {
 		property: "border",
 		scale: "borders"
