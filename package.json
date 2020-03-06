@@ -41,6 +41,9 @@
 		}
 	},
 	"lint-staged": {
+		"*.ts,tsx": [
+			"tsc --noEmit"
+		],
 		"*.{js,ts,tsx}": [
 			"eslint --ext js,ts,tsx --fix",
 			"git add"
