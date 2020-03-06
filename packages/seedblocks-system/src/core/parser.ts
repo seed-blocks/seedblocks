@@ -1,6 +1,6 @@
 import assign from "object-assign";
 import { defaults } from "../constants";
-import {ConfigStyle, NullOrUndefined, Parse, Scale, styleFn} from "./types";
+import { ConfigStyle, NullOrUndefined, Parse, Scale, styleFn } from "./types";
 import { get } from "./get";
 import { merge } from "./merge";
 // TODO: Fix eslint issues
