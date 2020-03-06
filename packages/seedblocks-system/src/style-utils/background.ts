@@ -1,6 +1,7 @@
 import { system } from "../core/parser";
+import { Config } from "../core/types";
 
-const config: { [key: string]: boolean } = {
+const config: Config = {
 	background: true,
 	backgroundImage: true,
 	backgroundSize: true,
