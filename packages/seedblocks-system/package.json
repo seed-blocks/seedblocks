@@ -1,6 +1,6 @@
 {
 	"name": "@seedblocks/system",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "SeedBlocks design system, tokens and helper utilities",
 	"sideEffects": false,
 	"license": "MIT",
@@ -22,7 +22,7 @@
 		"clean": "../../scripts/build/clean.js",
 		"build": "../../scripts/build/build.js",
 		"docs": "../../scripts/build/docs.js",
-		"preversion": "yarn lint && yarn test && yarn docs && yarn build",
+		"_preversion": "yarn lint && yarn test && yarn docs && yarn build",
 		"postpublish": "yarn clean"
 	},
 	"keywords": [
