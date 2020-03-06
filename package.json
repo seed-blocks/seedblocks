@@ -137,5 +137,6 @@
 		"rollup-plugin-url": "3.0.1",
 		"ts-morph": "6.0.2",
 		"typescript": "3.8.2"
-	}
+	},
+	"version": "0.0.0"
 }
