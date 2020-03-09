@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system/compare/@seedblocks/system@0.21.0...@seedblocks/system@0.21.1) (2020-03-09)
+
+
+### Bug Fixes
+
+* fix package repo url ([b563c1f](https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system/commit/b563c1fb382b2cf3738326980a28084933295be0))
+
+
+
+
+
 # 0.21.0 (2020-03-09)
 
 

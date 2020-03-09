@@ -3,8 +3,7 @@
 		"packages/*"
 	],
 	"publishConfig": {
-		"access": "public",
-		"registry": "https://github.com/seed-blocks/seedblocks"
+		"access": "public"
 	},
 	"version": "independent",
 	"npmClient": "yarn",
