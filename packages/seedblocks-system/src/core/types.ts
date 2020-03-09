@@ -122,19 +122,6 @@ export interface SpaceProps<
 	paddingY?: ResponsiveValue<TVal, ThemeType>;
 }
 
-// Preserved to support v4 shim:
-// https://github.com/styled-system/styled-system/blob/master/packages/styled-system/src/index.js#L108
-export interface LowLevelStyleFunctionArguments<N, S> {
-	prop: string;
-	cssProperty?: string;
-	alias?: string;
-	key?: string;
-	transformValue?: (n: N, scale?: S) => any;
-	scale?: S;
-	// new v5 api
-	properties?: string[];
-}
-
 export interface styleFn {
 	(...args: any[]): any;
 	config?: object;
