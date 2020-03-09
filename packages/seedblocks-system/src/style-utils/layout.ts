@@ -1,10 +1,6 @@
 import { system } from "../core/parser";
-import { get } from "../core/get";
-import { NullOrUndefined, Scale, Config } from "../core/types";
-
-const isNumber = (n: any) => typeof n === "number" && !isNaN(n);
-const getWidth = (n: any, scale: Scale): number | string | NullOrUndefined =>
-	get(scale, n, !isNumber(n) || n > 1 ? n : `${n * 100}%`);
+import { getWidth } from "../core/get";
+import { Config } from "../core/types";
 
 const config: Config = {
 	width: {
