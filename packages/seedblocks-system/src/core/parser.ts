@@ -1,14 +1,13 @@
 import assign from "object-assign";
 import { defaults } from "../constants";
-import { ConfigStyle, Parse, Scale, styleFn } from "./types";
+import { ConfigStyle, NullOrUndefined, Parse, Scale, styleFn } from "./types";
 import { get } from "./get";
 import { merge } from "./merge";
 // TODO: Fix eslint issues
 /* eslint-disable no-continue,guard-for-in,no-shadow, consistent-return */
 
-function getValue(value: any, scale?: Scale): any {
-	if (scale !== undefined) return get(scale, value, value);
-	return undefined;
+function getValue(value: any, scale: Scale): number | string | NullOrUndefined {
+	return get(scale, value, value);
 }
 
 function createMediaQuery(bp: string): string {
