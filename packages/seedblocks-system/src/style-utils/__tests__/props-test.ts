@@ -21,7 +21,7 @@ const props = {
 	color: "white"
 };
 
-test("omits styled-system props", () => {
+test("omits @seedblocks/system props", () => {
 	const attr = omit(props);
 	expect(attr).toEqual({
 		id: "hi",
@@ -29,7 +29,7 @@ test("omits styled-system props", () => {
 	});
 });
 
-test("picks styled-system props", () => {
+test("picks @seedblocks/system props", () => {
 	const sx = pick(props);
 	expect(sx).toEqual({
 		p: 3,
