@@ -4,7 +4,7 @@
 	"description": "SeedBlocks design system, tokens and helper utilities",
 	"sideEffects": false,
 	"license": "MIT",
-	"repository": "https://github.com/seed-blocks/packages/seedblocks-system",
+	"repository": "https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system",
 	"main": "lib/index.js",
 	"module": "es/index.js",
 	"unpkg": "dist/seedblocks-system.min.js",
