@@ -1,6 +1,6 @@
 {
 	"name": "@seedblocks/system",
-	"version": "0.12.0",
+	"version": "0.20.0",
 	"description": "SeedBlocks design system, tokens and helper utilities",
 	"sideEffects": false,
 	"license": "MIT",
