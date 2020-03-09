@@ -21,11 +21,15 @@
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"noEmit": true,
+		"noEmit": false,
 		"typeRoots": [
 			"./node_modules/@types",
 			"./node_modules/babel-plugin-jsx-dom-expressions",
 			"./types"
-		]
+		],
+		"paths": {
+			"@seedblocks/system": ["./node_modules/@seedblocks/system/src"],
+			"@seedblocks/system/*": ["./node_modules/@seedblocks/system/src/*"]
+		}
 	}
 }
