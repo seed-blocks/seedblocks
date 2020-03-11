@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system/compare/@seedblocks/system@0.21.1...@seedblocks/system@0.21.2) (2020-03-11)
+
+
+### Bug Fixes
+
+* fix npm publish bundles ([6d63c45](https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system/commit/6d63c45236bf9c6c78a45c777c8d775b0d04ffa3))
+
+
+
+
+
 ## [0.21.1](https://github.com/seed-blocks/seedblocks/tree/master/packages/seedblocks-system/compare/@seedblocks/system@0.21.0...@seedblocks/system@0.21.1) (2020-03-09)
 
 
