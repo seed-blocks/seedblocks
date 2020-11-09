@@ -1,7 +1,7 @@
-const babel = require("rollup-plugin-babel");
-const resolve = require("rollup-plugin-node-resolve");
-const replace = require("rollup-plugin-replace");
-const commonjs = require("rollup-plugin-commonjs");
+const { babel } = require("@rollup/plugin-babel");
+const { nodeResolve } = require("@rollup/plugin-node-resolve");
+const replace = require("@rollup/plugin-replace");
+const commonjs = require("@rollup/plugin-commonjs");
 const { terser } = require("rollup-plugin-terser");
 const ignore = require("rollup-plugin-ignore");
 const { camelCase, upperFirst } = require("lodash");
@@ -26,7 +26,7 @@ function makeExternalPredicate(externalArr) {
 		return () => false;
 	}
 	const pattern = new RegExp(`^(${externalArr.join("|")})($|/)`);
-	return id => pattern.test(id);
+	return (id) => pattern.test(id);
 }
 
 function getExternal(isUMD) {
@@ -39,26 +39,16 @@ function getPlugins(isUMD) {
 	const commonPlugins = [
 		babel({
 			extensions,
+			babelHelpers: "bundled",
 			exclude: ["node_modules/**", "../../node_modules/**"]
 		}),
-		commonjs({
-			include: /node_modules/,
-			namedExports: {
-				"body-scroll-lock": ["enableBodyScroll", "disableBodyScroll"]
-			}
-		}),
-		resolve({ extensions, preferBuiltins: false })
+		nodeResolve({ extensions, preferBuiltins: false })
 	];
 
 	if (isUMD) {
 		return [
 			...commonPlugins,
-			commonjs({
-				include: /node_modules/,
-				namedExports: {
-					"body-scroll-lock": ["enableBodyScroll", "disableBodyScroll"]
-				}
-			}),
+			commonjs({ include: /node_modules/ }),
 			ignore(["stream"]),
 			terser(),
 			replace({
@@ -78,6 +68,7 @@ function getOutput(isUMD) {
 			format: "umd",
 			exports: "named",
 			globals: {
+				seedblocks: "SeedBlocks",
 				react: "React",
 				"react-dom": "ReactDOM"
 			}
