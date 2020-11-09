@@ -10,32 +10,30 @@
 		]
 	},
 	"scripts": {
-		"postinstall": "patch-package",
 		"test": "jest",
-		"test:all": "yarn lint && yarn build && yarn type-check && yarn test && yarn website:build && yarn clean && yarn website:serve",
+		"test:all": "yarn lint && yarn lint:css && yarn build && yarn type-check && yarn test && yarn website:build && yarn clean && yarn website:serve",
 		"coverage": "yarn test --coverage",
 		"postcoverage": "open-cli coverage/lcov-report/index.html",
 		"type-check": "tsc --noEmit",
-		"lint": "eslint --ext js,ts,tsx .",
+		"lint": "eslint . --ext js,ts,tsx",
+		"lint:css": "stylelint 'packages/**/styles.{js,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",
-		"storybook:build": "build-storybook",
-		"clean": "lerna exec --scope @seedblocks/* -- yarn clean",
-		"build": "lerna exec --scope @seedblocks/* --concurrency 1 -- yarn build",
-		"build:fast": "yarn build -- -- --no-umd",
-		"docs": "lerna exec --scope @seedblocks/* --concurrency 1 -- yarn docs",
+		"storybook:build": "build-storybook -o packages/website/public/storybook",
+		"clean": "lerna exec --scope seedblocks* -- yarn clean",
+		"build": "lerna exec --scope seedblocks* --concurrency 1 -- yarn build",
+		"build:fast": "yarn build --no-umd",
+		"keys": "lerna exec --scope seedblocks -- yarn keys",
+		"docs": "lerna exec --scope seedblocks* -- yarn docs",
 		"website": "lerna exec --scope website -- yarn start",
 		"website:build": "lerna exec --scope website -- yarn build",
 		"website:serve": "lerna exec --scope website -- yarn serve",
-		"prerelease": "patch-package",
-		"release": "lerna publish",
-		"changelog": "lerna-changelog",
-		"commit": "git-cz",
-		"setup": "lerna bootstrap",
-		"refresh:modules": "rimraf ./**/node_modules && yarn setup"
+		"prerelease": "npm whoami && patch-package && yarn build",
+		"release": "lerna publish --pre-dist-tag next",
+		"release:next": "yarn release --no-git-tag-version --no-changelog",
+		"release:graduate": "yarn release --conventional-graduate"
 	},
 	"husky": {
 		"hooks": {
-			"commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS",
 			"pre-commit": "lint-staged"
 		}
 	},
@@ -44,22 +42,11 @@
 			"tsc --noEmit"
 		],
 		"*.{js,ts,tsx}": [
-			"eslint --ext js,ts,tsx --fix",
-			"git add"
+			"eslint --ext js,ts,tsx --fix"
 		],
 		"{README,CHANGELOG}.md": [
 			"scripts/copy-statics.sh"
 		]
-	},
-	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-lerna-changelog"
-		}
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.12.1",
@@ -134,7 +121,10 @@
 		"rollup-plugin-ignore": "^1.0.9",
 		"rollup-plugin-terser": "^7.0.2",
 		"stylelint": "^13.7.2",
+		"stylelint-config-recommended": "^3.0.0",
 		"stylelint-config-standard": "^20.0.0",
+		"stylelint-config-styled-components": "^0.1.1",
+		"stylelint-processor-styled-components": "^1.10.0",
 		"ts-morph": "^8.1.2",
 		"typescript": "^4.0.5",
 		"unified": "^9.2.0"
