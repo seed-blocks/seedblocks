@@ -1,35 +1,9 @@
 {
+	"extends": "./tsconfig.prod.json",
 	"compilerOptions": {
-		"baseUrl": ".",
-		"target": "esnext",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"jsx": "preserve",
-		"lib": ["dom"],
-		"strict": true,
-		"strictFunctionTypes": false,
-		"declaration": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"stripInternal": true,
-		"allowJs": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": false,
-		"typeRoots": [
-			"./node_modules/@types",
-			"./node_modules/babel-plugin-jsx-dom-expressions",
-			"./types"
-		],
 		"paths": {
-			"@seedblocks/system": ["./node_modules/@seedblocks/system/src"],
-			"@seedblocks/system/*": ["./node_modules/@seedblocks/system/src/*"]
+			"seedblocks": ["packages/seedblocks/src"],
+			"seedblocks/*": ["packages/seedblocks/src/*"]
 		}
 	}
 }

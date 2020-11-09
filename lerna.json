@@ -1,24 +1,16 @@
 {
-	"packages": [
-		"packages/*"
-	],
+	"packages": ["packages/*"],
 	"publishConfig": {
 		"access": "public"
 	},
 	"version": "independent",
 	"npmClient": "yarn",
 	"useWorkspaces": true,
-	"ignoreChanges": [
-		"**/__tests__/**",
-		"**/*.md"
-	],
+	"ignoreChanges": ["**/__tests__/**", "**/*.md"],
 	"command": {
 		"publish": {
 			"conventionalCommits": true,
-			"allowBranch": [
-				"master",
-				"next"
-			],
+			"allowBranch": ["master", "next"],
 			"message": "chore(release): publish release"
 		}
 	}

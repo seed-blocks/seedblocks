@@ -1,6 +1,7 @@
 module.exports = {
 	parser: "babel-eslint",
-	extends: ["airbnb", "plugin:prettier/recommended"],
+	extends: ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+	plugins: ["jest"],
 	env: {
 		jest: true,
 		browser: true
@@ -16,8 +17,7 @@ module.exports = {
 		}
 	},
 	rules: {
-		"camelcase": "off",
-		"semi": [1, "always"],
+		camelcase: "off",
 		"no-use-before-define": "off",
 		"no-restricted-syntax": "off",
 		"no-param-reassign": "off",
@@ -32,24 +32,37 @@ module.exports = {
 		"jsx-a11y/label-has-for": "off",
 		"jsx-a11y/label-has-associated-control": "off",
 		"jsx-a11y/no-autofocus": "off",
+		"react/jsx-props-no-spreading": "off",
 		"import/export": "off",
-		"import/no-unresolved": "off",
 		"import/extensions": "off",
 		"import/prefer-default-export": "off",
 		"import/no-named-as-default": "off",
 		"import/no-webpack-loader-syntax": "off",
 		"import/no-extraneous-dependencies": "off",
+		"react/no-danger": "off",
 		"jsx-a11y/anchor-has-content": "off",
+		"react/no-multi-comp": "off",
+		"react/require-default-props": "off",
+		"react/default-props-match-prop-types": "off",
+		"react/no-array-index-key": "off",
+		"react/prop-types": "off",
+		"react/jsx-filename-extension": "off",
+		"react/destructuring-assignment": "off",
+		"react/button-has-type": "off",
+		"react/state-in-constructor": "off",
+		"jsx-a11y/accessible-emoji": "off",
+		"jest/consistent-test-it": [
+			"error",
+			{
+				fn: "test",
+				withinDescribe: "test"
+			}
+		],
 		"import/order": [
 			"error",
 			{
 				"newlines-between": "never",
-				groups: [
-					["builtin", "external", "internal"],
-					"parent",
-					"sibling",
-					"index"
-				]
+				groups: [["builtin", "external", "internal"], "parent", "sibling", "index"]
 			}
 		]
 	},
@@ -59,6 +72,7 @@ module.exports = {
 			plugins: ["markdown"],
 			rules: {
 				"no-unused-vars": "off",
+				"react/react-in-jsx-scope": "off"
 			}
 		},
 		{

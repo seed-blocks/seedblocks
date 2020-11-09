@@ -1,24 +1,24 @@
 #! /usr/bin/env bash
 
 #########################################################################
-#### Keeps changelog and readme at root in sync with packages/reakit ####
+#### Keeps changelog and readme at root in sync with packages/seedblocks ####
 #########################################################################
 
 for file in CHANGELOG.md README.md; do
   rootFile="${PWD}/$file"
-  reakitFile="packages/reakit/$file"
-  if [[ "$*" =~ $rootFile ]] && [[ "$*" =~ $reakitFile ]]; then
+  seedblocksFile="packages/seedblocks/$file"
+  if [[ "$*" =~ $rootFile ]] && [[ "$*" =~ $seedblocksFile ]]; then
     # If both staged do nothing and let commit continue
     exit 0
   fi
 
   if [[ "$*" =~ $rootFile ]]; then
-    cp "$rootFile" "$reakitFile"
-    git add "$reakitFile"
+    cp "$rootFile" "$seedblocksFile"
+    git add "$seedblocksFile"
   fi
 
-  if [[ "$*" =~ $reakitFile ]]; then
-    cp "$reakitFile" "$rootFile"
+  if [[ "$*" =~ $seedblocksFile ]]; then
+    cp "$seedblocksFile" "$rootFile"
     git add "$rootFile"
   fi
 done
