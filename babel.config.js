@@ -1,5 +1,5 @@
-const test = process.env.NODE_ENV === "test";
-const prod = process.env.NODE_ENV === "production";
+const test = process.env.NODE_ENV === 'test';
+const prod = process.env.NODE_ENV === 'production';
 
 const { warn } = console;
 
@@ -8,7 +8,7 @@ const { warn } = console;
 // eslint-disable-next-line no-console
 console.warn = (...args) => {
 	for (const arg of args) {
-		if (arg.startsWith("Could not resolve") && /src/.test(arg)) {
+		if (arg.startsWith('Could not resolve') && /src/.test(arg)) {
 			return;
 		}
 	}
@@ -18,31 +18,31 @@ console.warn = (...args) => {
 module.exports = {
 	presets: [
 		[
-			"@babel/preset-env",
+			'@babel/preset-env',
 			{
-				modules: test ? "commonjs" : false,
+				modules: test ? 'commonjs' : false,
 				loose: true,
 				targets: test
-					? { node: "current" }
+					? { node: 'current' }
 					: {
-							browsers: "defaults"
+							browsers: 'defaults'
 					  }
 			}
 		],
-		"@babel/preset-typescript",
-		"solid"
+		'@babel/preset-typescript',
+		'solid'
 	],
 	plugins: [
-		"babel-plugin-dev-expression",
-		"babel-plugin-macros",
-		"@babel/plugin-proposal-class-properties",
-		"@babel/plugin-proposal-object-rest-spread",
-		"@babel/plugin-proposal-optional-chaining",
+		'babel-plugin-dev-expression',
+		'babel-plugin-macros',
+		'@babel/plugin-proposal-class-properties',
+		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-proposal-optional-chaining',
 		!prod && [
-			"babel-plugin-module-resolver",
+			'babel-plugin-module-resolver',
 			{
 				alias: {
-					"^@seedblocks([^/]*)(.*)$": "@seedblocks\\1/src\\2"
+					'^@seedblocks([^/]*)(.*)$': '@seedblocks\\1/src\\2'
 				}
 			}
 		]

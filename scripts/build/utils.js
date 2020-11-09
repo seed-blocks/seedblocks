@@ -1,7 +1,7 @@
-const { join, dirname, basename } = require("path");
-const ast = require("@textlint/markdown-to-ast");
-const inject = require("md-node-inject");
-const toMarkdown = require("ast-to-markdown");
+const { join, dirname, basename } = require('path');
+const ast = require('@textlint/markdown-to-ast');
+const inject = require('md-node-inject');
+const toMarkdown = require('ast-to-markdown');
 const {
 	readdirSync,
 	ensureDirSync,
@@ -9,11 +9,11 @@ const {
 	readFileSync,
 	lstatSync,
 	existsSync
-} = require("fs-extra");
-const { Project, ts } = require("ts-morph");
-const rimraf = require("rimraf");
-const chalk = require("chalk");
-const log = require("../log");
+} = require('fs-extra');
+const { Project, ts } = require('ts-morph');
+const rimraf = require('rimraf');
+const chalk = require('chalk');
+const log = require('../log');
 
 /**
  * Converts ./path/to/file.js to ./path/to
@@ -31,7 +31,7 @@ function resolveDir(dir) {
  */
 function getPackage(rootPath) {
 	// eslint-disable-next-line import/no-dynamic-require
-	return require(join(rootPath, "package.json"));
+	return require(join(rootPath, 'package.json'));
 }
 
 /**
@@ -84,7 +84,7 @@ function getMainDir(rootPath) {
  * @param {string} path
  */
 function removeExt(path) {
-	return path.replace(/\.[^.]+$/, "");
+	return path.replace(/\.[^.]+$/, '');
 }
 
 /**
@@ -93,7 +93,7 @@ function removeExt(path) {
  * @param {string[]} array
  */
 function isRootModule(path, array) {
-	const rootPath = path.replace(/^([^/]+).*$/, "$1");
+	const rootPath = path.replace(/^([^/]+).*$/, '$1');
 	return path === rootPath || !array.includes(rootPath);
 }
 
@@ -108,7 +108,7 @@ function isDirectory(path) {
  * @param {string} rootPath
  */
 function getSourcePath(rootPath) {
-	return join(rootPath, "src");
+	return join(rootPath, 'src');
 }
 
 /**
@@ -116,7 +116,7 @@ function getSourcePath(rootPath) {
  * @param {string} filePath
  */
 function normalizePath(filePath) {
-	return filePath.replace(/\\/g, "/");
+	return filePath.replace(/\\/g, '/');
 }
 
 /**
@@ -141,7 +141,7 @@ function isPublicModule(rootPath, filename) {
  * @param {string} rootPath
  * @param {string} prefix
  */
-function getPublicFiles(rootPath, prefix = "") {
+function getPublicFiles(rootPath, prefix = '') {
 	return readdirSync(rootPath)
 		.filter((filename) => isPublicModule(rootPath, filename))
 		.sort() // Ensure consistent order across platforms
@@ -164,8 +164,8 @@ function getPublicFiles(rootPath, prefix = "") {
 function getProxyFolders(rootPath) {
 	const publicFiles = getPublicFiles(getSourcePath(rootPath));
 	return Object.keys(publicFiles)
-		.map((name) => name.replace(/\/index$/, ""))
-		.filter((name) => name !== "index");
+		.map((name) => name.replace(/\/index$/, ''))
+		.filter((name) => name !== 'index');
 }
 
 /**
@@ -195,7 +195,7 @@ function cleanBuild(rootPath) {
 			cleaned.push(chalk.bold(chalk.gray(name)));
 		});
 	if (cleaned.length) {
-		log(["", `Cleaned in ${chalk.bold(pkg.name)}:`, `${cleaned.join(", ")}`].join("\n"));
+		log(['', `Cleaned in ${chalk.bold(pkg.name)}:`, `${cleaned.join(', ')}`].join('\n'));
 	}
 }
 
@@ -219,9 +219,9 @@ function makeGitignore(rootPath) {
 		.filter(isRootModule)
 		.sort() // Ensure that the order is consistent across platforms
 		.map((name) => `/${name}`)
-		.join("\n");
-	writeFileSync(join(rootPath, ".gitignore"), `# Automatically generated\n${contents}\n`);
-	log(`\nCreated in ${chalk.bold(pkg.name)}: ${chalk.bold(chalk.green(".gitignore"))}`);
+		.join('\n');
+	writeFileSync(join(rootPath, '.gitignore'), `# Automatically generated\n${contents}\n`);
+	log(`\nCreated in ${chalk.bold(pkg.name)}: ${chalk.bold(chalk.green('.gitignore'))}`);
 }
 
 /**
@@ -233,7 +233,7 @@ function getProxyPackageContents(rootPath, moduleName) {
 	const mainDir = getMainDir(rootPath);
 	const moduleDir = getModuleDir(rootPath);
 	const typesDir = getTypesDir(rootPath);
-	const prefix = "../".repeat(moduleName.split("/").length);
+	const prefix = '../'.repeat(moduleName.split('/').length);
 	const json = {
 		name: `${name}/${moduleName}`,
 		private: true,
@@ -258,7 +258,7 @@ function makeProxies(rootPath) {
 	});
 	if (created.length) {
 		log(
-			["", `Created proxies in ${chalk.bold(pkg.name)}:`, `${created.join(", ")}`].join("\n")
+			['', `Created proxies in ${chalk.bold(pkg.name)}:`, `${created.join(', ')}`].join('\n')
 		);
 	}
 }
@@ -267,18 +267,18 @@ function makeProxies(rootPath) {
  * @param {string} rootPath
  */
 function hasTSConfig(rootPath) {
-	return existsSync(join(rootPath, "tsconfig.json"));
+	return existsSync(join(rootPath, 'tsconfig.json'));
 }
 
 /**
  * @param {string} rootPath
  */
 function makeTSConfigProd(rootPath) {
-	const filepath = join(rootPath, "tsconfig.json");
+	const filepath = join(rootPath, 'tsconfig.json');
 	const contents = readFileSync(filepath);
 	const json = JSON.parse(contents);
-	json.extends = json.extends.replace("tsconfig.json", "tsconfig.prod.json");
-	json.exclude = [...(json.exlcude || []), "src/**/__*"];
+	json.extends = json.extends.replace('tsconfig.json', 'tsconfig.prod.json');
+	json.exclude = [...(json.exlcude || []), 'src/**/__*'];
 	writeFileSync(filepath, JSON.stringify(json, null, 2));
 	return function restoreTSConfig() {
 		writeFileSync(filepath, contents);
@@ -299,7 +299,7 @@ function getEscapedName(node) {
 function isStateReturnDeclaration(node) {
 	const kindName = node.getKindName();
 	const escapedName = getEscapedName(node);
-	return kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName);
+	return kindName === 'TypeAliasDeclaration' && /.+StateReturn$/.test(escapedName);
 }
 
 /**
@@ -308,7 +308,7 @@ function isStateReturnDeclaration(node) {
 function isInitialStateDeclaration(node) {
 	const kindName = node.getKindName();
 	const escapedName = getEscapedName(node);
-	return kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName);
+	return kindName === 'TypeAliasDeclaration' && /.+InitialState$/.test(escapedName);
 }
 
 /**
@@ -317,7 +317,7 @@ function isInitialStateDeclaration(node) {
 function isOptionsDeclaration(node) {
 	const kindName = node.getKindName();
 	const escapedName = getEscapedName(node);
-	return kindName === "TypeAliasDeclaration" && /.+Options$/.test(escapedName);
+	return kindName === 'TypeAliasDeclaration' && /.+Options$/.test(escapedName);
 }
 
 /**
@@ -332,10 +332,10 @@ function isPropsDeclaration(node) {
  */
 function getModuleName(node) {
 	return getEscapedName(node)
-		.replace("unstable_", "")
-		.replace(/^(.+)InitialState$/, "use$1State")
-		.replace(/^(.+)StateReturn$/, "$1State")
-		.replace("Options", "");
+		.replace('unstable_', '')
+		.replace(/^(.+)InitialState$/, 'use$1State')
+		.replace(/^(.+)StateReturn$/, '$1State')
+		.replace('Options', '');
 }
 
 /**
@@ -360,7 +360,7 @@ function getJsDocs(symbol) {
  */
 function getComment(symbol) {
 	const jsDocs = getJsDocs(symbol);
-	if (!jsDocs) return "";
+	if (!jsDocs) return '';
 	return jsDocs.getDescription().trim();
 }
 
@@ -384,7 +384,7 @@ function getProps(node, includePrivate) {
 	if (includePrivate) {
 		return props;
 	}
-	return props.filter((prop) => !getTagNames(prop).includes("JSDocPrivateTag"));
+	return props.filter((prop) => !getTagNames(prop).includes('JSDocPrivateTag'));
 }
 
 /**
@@ -409,7 +409,7 @@ function getPropType(prop) {
 function getReadmePaths(rootPath) {
 	const publicFiles = getPublicFiles(getSourcePath(rootPath));
 	const readmePaths = Object.values(publicFiles).reduce((acc, filePath) => {
-		const readmePath = join(dirname(filePath), "README.md");
+		const readmePath = join(dirname(filePath), 'README.md');
 		if (!acc.includes(readmePath) && existsSync(readmePath)) {
 			return [...acc, readmePath];
 		}
@@ -456,13 +456,13 @@ function sortSourceFiles(sourceFiles) {
  * @param {ReturnType<typeof createPropTypeObject>} prop
  */
 function getPropTypesRow(prop) {
-	const symbol = /unstable_/.test(prop.name) ? ' <span title="Experimental">⚠️</span>' : "";
+	const symbol = /unstable_/.test(prop.name) ? ' <span title="Experimental">⚠️</span>' : '';
 	const name = `**\`${prop.name}\`**${symbol}`;
 
 	return `- ${name}
   ${prop.type}
 
-  ${prop.description.split("\n\n").join("\n\n  ")}
+  ${prop.description.split('\n\n').join('\n\n  ')}
 `;
 }
 
@@ -473,7 +473,7 @@ function getPropTypesMarkdown(types) {
 	const content = Object.keys(types)
 		.map((title) => {
 			const props = types[title];
-			const rows = props.map(getPropTypesRow).join("\n");
+			const rows = props.map(getPropTypesRow).join('\n');
 			const stateProps = props.stateProps || [];
 			const hiddenRows = stateProps.length
 				? `
@@ -481,17 +481,17 @@ function getPropTypesMarkdown(types) {
 
 > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
 
-${stateProps.map(getPropTypesRow).join("\n")}
+${stateProps.map(getPropTypesRow).join('\n')}
 </details>`
-				: "";
+				: '';
 
 			return `
 ### \`${title}\`
 
-${rows || (hiddenRows ? "" : "No props to show")}
+${rows || (hiddenRows ? '' : 'No props to show')}
 ${hiddenRows}`;
 		})
-		.join("\n\n");
+		.join('\n\n');
 
 	return `
 <!-- Automatically generated -->
@@ -510,12 +510,12 @@ function injectPropTypes(rootPath) {
 	const created = [];
 
 	const project = new Project({
-		tsConfigFilePath: join(rootPath, "tsconfig.json"),
+		tsConfigFilePath: join(rootPath, 'tsconfig.json'),
 		addFilesFromTsConfig: false
 	});
 
 	readmePaths.forEach((readmePath) => {
-		const mdContents = readFileSync(readmePath, { encoding: "utf-8" });
+		const mdContents = readFileSync(readmePath, { encoding: 'utf-8' });
 
 		if (/#\s?Props/.test(mdContents)) {
 			const dir = dirname(readmePath);
@@ -553,7 +553,7 @@ function injectPropTypes(rootPath) {
 
 			const propTypesMarkdown = getPropTypesMarkdown(types);
 			try {
-				const merged = inject("Props", tree, ast.parse(propTypesMarkdown));
+				const merged = inject('Props', tree, ast.parse(propTypesMarkdown));
 				const markdown = toMarkdown(merged).trimLeft();
 				writeFileSync(readmePath, markdown);
 				created.push(chalk.bold(chalk.green(basename(dir))));
@@ -565,8 +565,8 @@ function injectPropTypes(rootPath) {
 
 	if (created.length) {
 		log(
-			["", `Injected prop types in ${chalk.bold(pkg.name)}:`, `${created.join(", ")}`].join(
-				"\n"
+			['', `Injected prop types in ${chalk.bold(pkg.name)}:`, `${created.join(', ')}`].join(
+				'\n'
 			)
 		);
 	}
@@ -576,11 +576,11 @@ function injectPropTypes(rootPath) {
  * @param {Function} callback
  */
 function onExit(callback) {
-	process.on("exit", callback);
-	process.on("SIGINT", callback);
-	process.on("SIGUSR1", callback);
-	process.on("SIGUSR2", callback);
-	process.on("uncaughtException", callback);
+	process.on('exit', callback);
+	process.on('SIGINT', callback);
+	process.on('SIGUSR1', callback);
+	process.on('SIGUSR2', callback);
+	process.on('uncaughtException', callback);
 }
 
 module.exports = {

@@ -1,10 +1,10 @@
-const { babel } = require("@rollup/plugin-babel");
-const { nodeResolve } = require("@rollup/plugin-node-resolve");
-const replace = require("@rollup/plugin-replace");
-const commonjs = require("@rollup/plugin-commonjs");
-const { terser } = require("rollup-plugin-terser");
-const ignore = require("rollup-plugin-ignore");
-const { camelCase, upperFirst } = require("lodash");
+const { babel } = require('@rollup/plugin-babel');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
+const commonjs = require('@rollup/plugin-commonjs');
+const { terser } = require('rollup-plugin-terser');
+const ignore = require('rollup-plugin-ignore');
+const { camelCase, upperFirst } = require('lodash');
 const {
 	getIndexPath,
 	getPublicFiles,
@@ -12,12 +12,12 @@ const {
 	getPackage,
 	getModuleDir,
 	getMainDir
-} = require("./utils");
+} = require('./utils');
 
 const cwd = process.cwd();
 const pkg = getPackage(cwd);
 const sourcePath = getSourcePath(cwd);
-const extensions = [".ts", ".tsx", ".js", ".jsx", ".json"];
+const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
 
 // Keeps subdirectories and files belonging to our dependencies as external too
 // (i.e. lodash/pick)
@@ -25,7 +25,7 @@ function makeExternalPredicate(externalArr) {
 	if (!externalArr.length) {
 		return () => false;
 	}
-	const pattern = new RegExp(`^(${externalArr.join("|")})($|/)`);
+	const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`);
 	return (id) => pattern.test(id);
 }
 
@@ -39,8 +39,8 @@ function getPlugins(isUMD) {
 	const commonPlugins = [
 		babel({
 			extensions,
-			babelHelpers: "bundled",
-			exclude: ["node_modules/**", "../../node_modules/**"]
+			babelHelpers: 'bundled',
+			exclude: ['node_modules/**', '../../node_modules/**']
 		}),
 		nodeResolve({ extensions, preferBuiltins: false })
 	];
@@ -49,10 +49,10 @@ function getPlugins(isUMD) {
 		return [
 			...commonPlugins,
 			commonjs({ include: /node_modules/ }),
-			ignore(["stream"]),
+			ignore(['stream']),
 			terser(),
 			replace({
-				"process.env.NODE_ENV": JSON.stringify("production")
+				'process.env.NODE_ENV': JSON.stringify('production')
 			})
 		];
 	}
@@ -65,12 +65,12 @@ function getOutput(isUMD) {
 		return {
 			name: upperFirst(camelCase(pkg.name)),
 			file: pkg.unpkg,
-			format: "umd",
-			exports: "named",
+			format: 'umd',
+			exports: 'named',
 			globals: {
-				seedblocks: "SeedBlocks",
-				react: "React",
-				"react-dom": "ReactDOM"
+				seedblocks: 'SeedBlocks',
+				react: 'React',
+				'react-dom': 'ReactDOM'
 			}
 		};
 	}
@@ -79,13 +79,13 @@ function getOutput(isUMD) {
 
 	return [
 		moduleDir && {
-			format: "es",
+			format: 'es',
 			dir: moduleDir
 		},
 		{
-			format: "cjs",
+			format: 'cjs',
 			dir: getMainDir(cwd),
-			exports: "named"
+			exports: 'named'
 		}
 	].filter(Boolean);
 }

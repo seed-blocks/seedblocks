@@ -1,25 +1,25 @@
-const { matcherHint, printReceived, printExpected } = require("jest-matcher-utils");
-const { toHaveNoViolations: axeMatchers } = require("jest-axe");
-const matchers = require("@testing-library/jest-dom/matchers");
+const { matcherHint, printReceived, printExpected } = require('jest-matcher-utils');
+const { toHaveNoViolations: axeMatchers } = require('jest-axe');
+const matchers = require('@testing-library/jest-dom/matchers');
 
 // Consider [aria-activedescendant="${id}"] #${id} as the focused element.
 function toHaveFocus(element) {
 	const result = matchers.toHaveFocus.call(this, element);
 	const { activeElement } = element.ownerDocument;
-	const activeId = activeElement && activeElement.getAttribute("aria-activedescendant");
+	const activeId = activeElement && activeElement.getAttribute('aria-activedescendant');
 	return {
 		...result,
 		pass: result.pass || activeId === element.id,
 		message: () => {
 			if (activeId) {
 				return [
-					matcherHint(`${this.isNot ? ".not" : ""}.toHaveFocus`, "element", ""),
-					"",
-					"Expected:",
+					matcherHint(`${this.isNot ? '.not' : ''}.toHaveFocus`, 'element', ''),
+					'',
+					'Expected:',
 					`  ${printExpected(element)}`,
-					"Received:",
+					'Received:',
 					`  ${printReceived(element.ownerDocument.getElementById(activeId))}`
-				].join("\n");
+				].join('\n');
 			}
 			return result.message();
 		}

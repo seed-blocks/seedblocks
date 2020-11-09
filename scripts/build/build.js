@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-const { join } = require("path");
-const spawn = require("cross-spawn");
-const { hasTSConfig, makeTSConfigProd, makeProxies, makeGitignore, onExit } = require("./utils");
+const { join } = require('path');
+const spawn = require('cross-spawn');
+const { hasTSConfig, makeTSConfigProd, makeProxies, makeGitignore, onExit } = require('./utils');
 
-require("./clean");
-require("./docs");
+require('./clean');
+require('./docs');
 
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = 'production';
 
-if (process.argv.includes("--no-umd")) {
+if (process.argv.includes('--no-umd')) {
 	process.env.NO_UMD = true;
 }
 
@@ -19,9 +19,9 @@ makeProxies(cwd);
 
 if (hasTSConfig(cwd)) {
 	onExit(makeTSConfigProd(cwd));
-	spawn.sync("tsc", ["--emitDeclarationOnly"], { stdio: "inherit" });
+	spawn.sync('tsc', ['--emitDeclarationOnly'], { stdio: 'inherit' });
 }
 
-spawn.sync("rollup", ["-c", join(__dirname, "rollup.config.js")], {
-	stdio: "inherit"
+spawn.sync('rollup', ['-c', join(__dirname, 'rollup.config.js')], {
+	stdio: 'inherit'
 });
