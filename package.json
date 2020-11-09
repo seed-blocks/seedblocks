@@ -22,7 +22,6 @@
 		"clean": "lerna exec --scope seedblocks* -- yarn clean",
 		"build": "lerna exec --scope seedblocks* --concurrency 1 -- yarn build",
 		"build:fast": "yarn build --no-umd",
-		"keys": "lerna exec --scope seedblocks -- yarn keys",
 		"docs": "lerna exec --scope seedblocks* -- yarn docs",
 		"website": "lerna exec --scope website -- yarn start",
 		"website:build": "lerna exec --scope website -- yarn build",

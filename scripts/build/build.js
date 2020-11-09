@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 const { join } = require("path");
 const spawn = require("cross-spawn");
-const {
-	makeProxies,
-	makeGitignore,
-	// makePlaygroundDeps,
-	cleanBuild,
-	hasTSConfig
-} = require("./utils");
+const { hasTSConfig, makeTSConfigProd, makeProxies, makeGitignore, onExit } = require("./utils");
+
+require("./clean");
+require("./docs");
 
 process.env.NODE_ENV = "production";
 
@@ -17,12 +14,11 @@ if (process.argv.includes("--no-umd")) {
 
 const cwd = process.cwd();
 
-cleanBuild(cwd);
 makeGitignore(cwd);
-// makePlaygroundDeps(cwd);
 makeProxies(cwd);
 
 if (hasTSConfig(cwd)) {
+	onExit(makeTSConfigProd(cwd));
 	spawn.sync("tsc", ["--emitDeclarationOnly"], { stdio: "inherit" });
 }
 
