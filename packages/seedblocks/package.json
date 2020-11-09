@@ -1,0 +1,48 @@
+{
+	"name": "seedblocks",
+	"version": "0.1.0",
+	"description": "Accessible, reusable, composable and customizable React components and design system to simplify complex websites and applications",
+	"sideEffects": false,
+	"license": "MIT",
+	"repository": "https://github.com/seed-blocks/seedblocks/packages/seedblocks",
+	"main": "lib/index.js",
+	"module": "es/index.js",
+	"unpkg": "dist/seedblocks.min.js",
+	"types": "ts",
+	"author": {
+		"name": "Praney Behl",
+		"email": "praneybehl@gmail.com",
+		"url": "https://github.com/praneybehl"
+	},
+	"scripts": {
+		"test": "jest",
+		"coverage": "yarn test --coverage",
+		"postcoverage": "open-cli coverage/lcov-report/index.html",
+		"lint": "eslint . --ext js,ts,tsx",
+		"clean": "node ../../scripts/build/clean.js",
+		"build": "node ../../scripts/build/build.js",
+		"keys": "node ../../scripts/build/keys.js",
+		"docs": "node ../../scripts/build/docs.js",
+		"preversion": "yarn lint && yarn test && yarn build",
+		"postpublish": "yarn clean"
+	},
+	"keywords": [
+		"seedblocks",
+		"seed-blocks",
+		"design-system",
+		"styled-components",
+		"styled-system",
+		"a11y",
+		"react",
+		"ui",
+		"library",
+		"toolkit",
+		"components"
+	],
+	"dependencies": {},
+	"peerDependencies": {
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1"
+	},
+	"devDependencies": {}
+}
